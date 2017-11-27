@@ -17,6 +17,18 @@ class App extends Component {
     }
   }
 
+  resetBoard(){
+    this.setState({
+      gameBoard: [
+        ' ',' ',' ',
+        ' ',' ',' ',
+        ' ',' ',' '
+      ],
+      turn: 'X'
+    })
+
+  }
+
   updateBoard(loc,player) {
 
   }
@@ -26,7 +38,7 @@ class App extends Component {
         <div className="menu">
           <h1>TicTacToe</h1>
           <Announsement />
-          <ResetButton />
+          <ResetButton reset={this.resetBoard.bind(this)} />
         </div>
       {this.state.gameBoard.map(function(value,i){
         return (
