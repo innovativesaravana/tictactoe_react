@@ -9,11 +9,12 @@ class App extends Component {
     super();
     this.state = {
       gameBoard: [
-        '1',' ',' ',
-        ' ','2',' ',
+        ' ',' ',' ',
+        ' ',' ',' ',
         ' ',' ',' '
       ],
-      turn: 'X'
+      turn: 'x',
+      winner: null
     }
   }
 
@@ -24,13 +25,77 @@ class App extends Component {
         ' ',' ',' ',
         ' ',' ',' '
       ],
-      turn: 'X',
+      turn: 'x',
       winner: null
     })
 
   }
 
   updateBoard(loc,player) {
+    if(this.state.gameBoard[loc] === 'x' || this.state.gameBoard[loc] == 'o' || this.state.winner) {
+      // invalid move
+      return;
+    }
+
+    let currentGameBoard = this.state.gameBoard;
+    currentGameBoard.splice(loc,1,this.state.turn);
+    this.setState({gameBoard: currentGameBoard});
+
+    let topRow = this.state.gameBoard[0] + this.state.gameBoard[1] + this.state.gameBoard[2]
+    if (topRow.match(/xxx|ooo/)) {
+      this.setState({winner: "winner is: " + player});
+      return;
+    }
+
+    let middleRow = this.state.gameBoard[3] + this.state.gameBoard[4] + this.state.gameBoard[5]
+    if (middleRow.match(/xxx|ooo/)) {
+      this.setState({winner: "winner is: " + player});
+      return;
+    }
+
+    let bottomRow = this.state.gameBoard[6] + this.state.gameBoard[7] + this.state.gameBoard[8]
+    if (bottomRow.match(/xxx|ooo/)) {
+      this.setState({winner: "winner is: " + player});
+      return;
+    }
+
+    let firstColumn = this.state.gameBoard[0] + this.state.gameBoard[3] + this.state.gameBoard[6]
+    if (firstColumn.match(/xxx|ooo/)) {
+      this.setState({winner: "winner is: " + player});
+      return;
+    }
+
+    let secondColumn = this.state.gameBoard[1] + this.state.gameBoard[4] + this.state.gameBoard[7]
+    if (secondColumn.match(/xxx|ooo/)) {
+      this.setState({winner: "winner is: " + player});
+      return;
+    }
+
+    let thirdColumn = this.state.gameBoard[2] + this.state.gameBoard[5] + this.state.gameBoard[8]
+    if (thirdColumn.match(/xxx|ooo/)) {
+      this.setState({winner: "winner is: " + player});
+      return;
+    }
+
+    let rightDiagonal = this.state.gameBoard[0] + this.state.gameBoard[4] + this.state.gameBoard[8]
+    if (rightDiagonal.match(/xxx|ooo/)) {
+      this.setState({winner: "winner is: " + player});
+      return;
+    }
+
+    let leftDiagonal = this.state.gameBoard[2] + this.state.gameBoard[4] + this.state.gameBoard[6]
+    if (leftDiagonal.match(/xxx|ooo/)) {
+      this.setState({winner: "winner is: " + player});
+      return;
+    }
+
+    let moves = this.state.gameBoard.join('').replace(/ /g,'');
+    if (moves.length === 9) {
+      this.setState({winner: 'draw'});
+      return;
+    }
+
+    this.setState({turn: (this.state.turn === 'x') ? 'o' : 'x'});
 
   }
   render() {
