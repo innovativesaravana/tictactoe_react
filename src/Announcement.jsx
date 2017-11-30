@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Announsement.css';
+import './Announcement.css';
 
-export default class Announsement extends Component{
+export default class Announcement extends Component{
   render() {
     return (
       <div className={this.props.winner ? 'visible' : 'hidden'}>

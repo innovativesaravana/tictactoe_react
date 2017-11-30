@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Announsement from './Announsement';
+import Announcement from './Announcement';
 import ResetButton from './ResetButton';
 import Tile from './Tile';
 
@@ -103,7 +103,7 @@ class App extends Component {
       <div className="container">
         <div className="menu">
           <h1>TicTacToe</h1>
-          <Announsement winner={this.state.winner}/>
+          <Announcement winner={this.state.winner}/>
           <ResetButton reset={this.resetBoard.bind(this)} />
         </div>
       {this.state.gameBoard.map(function(value,i){
